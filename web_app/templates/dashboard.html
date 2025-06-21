@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>📊 Dashboard | Ferilion Portal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f7f9fc;
+        }
+
+        .stat-card {
+            color: white;
+            border: none;
+            border-radius: 10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 15px rgba(0,0,0,0.15);
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+        }
+
+        .display-6 {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container mt-5">
+    <h2 class="mb-5 text-center">📊 Dashboard Overview</h2>
+
+    <!-- Flash messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <!-- Stats Cards -->
+    <div class="row g-4 text-center">
+        <div class="col-md-4">
+            <div class="card stat-card p-4" style="background: linear-gradient(135deg, #1e3c72, #2a5298);">
+                <h5 class="card-title">👥 Total Users</h5>
+                <p class="display-6">{{ total_users }}</p>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card stat-card p-4" style="background: linear-gradient(135deg, #11998e, #38ef7d);">
+                <h5 class="card-title">🎓 Total Trainees</h5>
+                <p class="display-6">{{ total_trainees }}</p>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card stat-card p-4" style="background: linear-gradient(135deg, #6a11cb, #2575fc);">
+                <h5 class="card-title">🧑‍💼 Total Management</h5>
+                <p class="display-6">{{ total_management }}</p>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card stat-card p-4" style="background: linear-gradient(135deg, #f7971e, #ffd200);">
+                <h5 class="card-title">📹 Videos Uploaded</h5>
+                <p class="display-6">{{ total_videos }}</p>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card stat-card p-4" style="background: linear-gradient(135deg, #ff512f, #dd2476);">
+                <h5 class="card-title">📁 Notes Uploaded</h5>
+                <p class="display-6">{{ total_notes }}</p>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card stat-card p-4" style="background: linear-gradient(135deg, #232526, #414345);">
+                <h5 class="card-title">👀 Video Watches</h5>
+                <p class="display-6">{{ total_watches }}</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Back Button -->
+    <div class="text-center mt-4">
+        <a href="{{ url_for('home') }}" class="btn btn-outline-secondary">⬅ Back to Home</a>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

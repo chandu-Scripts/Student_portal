@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ video.title }} | Ferilion Portal</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .video-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        video {
+            border-radius: 10px;
+            width: 100%;
+            height: auto;
+            max-height: 600px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container mt-5">
+    <div class="video-container">
+        <h3 class="mb-4">{{ video.title }}</h3>
+
+        <video controls>
+            <source src="{{ url_for('serve_video', filename=video.filename) }}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+
+        <div class="mt-4">
+            <a href="{{ url_for('view_videos') }}" class="btn btn-secondary">⬅️ Back to Videos</a>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

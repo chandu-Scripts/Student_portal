@@ -1,0 +1,64 @@
+<!-- templates/base.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Ferilion Portal{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+    <style>
+        body.dark-mode {
+            background-color: #121212 !important;
+            color: #f1f1f1 !important;
+        }
+        .dark-mode .card, .dark-mode .table, .dark-mode .form-control, .dark-mode .form-label {
+            background-color: #1e1e1e !important;
+            color: #f1f1f1 !important;
+        }
+        .dark-mode .btn {
+            border-color: #444;
+        }
+        .dark-mode .alert {
+            background-color: #2c2c2c;
+            color: #f8f9fa;
+        }
+    </style>
+</head>
+<body class="bg-light">
+
+<div class="container mt-4">
+    <!-- Flash messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <!-- Toggle Button -->
+    <div class="text-end mb-3">
+        <button class="btn btn-sm btn-outline-dark" onclick="toggleDarkMode()">🌓 Toggle Dark Mode</button>
+    </div>
+
+    {% block content %}{% endblock %}
+</div>
+
+<script>
+    function toggleDarkMode() {
+        document.body.classList.toggle("dark-mode");
+        localStorage.setItem("darkMode", document.body.classList.contains("dark-mode"));
+    }
+
+    window.onload = function () {
+        if (localStorage.getItem("darkMode") === "true") {
+            document.body.classList.add("dark-mode");
+        }
+    };
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
